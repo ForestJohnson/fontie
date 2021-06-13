@@ -13,20 +13,44 @@ This guide assumes that you are simply trying to run fontie on your own Linux/UN
 I needed this because I was trying to optimize a large font with lots of vector elements, and it was timing out on the `https://fontie.pixelsvsbytes.com` server.
 
 
+## dependencies 
+
+These MUST be installed before you attempt to convert a font with fontie!!
+
+  - `fontforge` python package
+     - See "using fontforge as a python package"
+  - `ttfautohint`
+     - `apt install -y ttfautohint` worked for me.
+     - you can download source from https://download.savannah.gnu.org/releases/freetype/ but I was unable to get this to work.
+     - test your installation by running `ttfautohint`
+  - `/opt/woff2/woff2_compress`
+     - I downloaded this from https://github.com/google/woff2 with `cd /opt && git clone https://github.com/google/woff2 && cd woff2`
+     - In order to build this, you need to initialize and pull the git submodules. `git submodule init && git submodule update brotli`
+     - finally, in order to build it, run `make`.
+     - test it by running `/opt/woff2/woff2_compress`
+  - `scour`
+     - sudo apt install scour
+  - `wine /opt/eotfast/EOTFAST-1.EXE`
+     - this is only required for building eot fonts (internet explorer) AFAIK. I skipped this ☠️ 
+    
+
+## obtaining fontie
 
 First, clone the fontforge repository:
 
 NOTE: I was not able to get the fontie http service to work without deleting some of the logging code & adding `os.path.abspath` in `FontieFont.py`. So per this guide you will have to use the ForestJohnson fork of fontie for now.
 
 ```
-# some scripts in the source code are hard-coded to /opt/fontie
+# some scripts in the source code are hard-coded to /opt/fontie. So we clone the repo there.
 cd /opt
 git clone https://github.com/ForestJohnson/fontie 
 cd fontie
 pipenv install
 ```
 
-NOTE: You can't actually install fontforge python package via pip! https://github.com/fontforge/fontforge/issues/4377
+## using fontforge as a python package
+
+You can't actually install fontforge python package via pip! https://github.com/fontforge/fontforge/issues/4377
 So you have to install it via your OS package manager. For me (ubuntu/debian) I used:
 
 ```
@@ -40,10 +64,10 @@ NOTE: According to https://fontforge.org/docs/scripting/python.html#python-exten
 > ...
 >
 > fontforge typically installs a Python module accessible to the system’s python executable, which can be accessed using:
-
-```
-import fontforge
-```
+> 
+> ```
+> import fontforge
+> ```
 
 However, on my system (ubuntu), I get 
 
