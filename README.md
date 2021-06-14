@@ -121,7 +121,28 @@ I can also get rid of the not-needed http headers, yielding the following comman
 curl -X POST -v 'localhost:8000/package/' -H 'Content-Type: multipart/form-data; boundary=---------------------------286836418736644408031661354643' --data-binary $'-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="font"\r\n\r\nfont_2c96d373-0dc3-4292-a288-5129f9774947\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="output"\r\n\r\nwoff\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="output"\r\n\r\nwoff2\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="output"\r\n\r\notf\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="lang"\r\n\r\non\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="ranges"\r\n\r\n0020-007F,20AC\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="ranges"\r\n\r\n00A0-00FF\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="hinting"\r\n\r\nnohint\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="fixes"\r\n\r\nmetrics\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="fixes"\r\n\r\nglyphs\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="fixes"\r\n\r\nreferences\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="fixes"\r\n\r\nname\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="css"\r\n\r\ncreate\r\n-----------------------------286836418736644408031661354643\r\nContent-Disposition: form-data; name="html"\r\n\r\ncreate\r\n-----------------------------286836418736644408031661354643--\r\n'
 ```
 
+While running, I saw lots of logs like 
 
+```
+Internal Error (overlap) in u: Humph. This monotonic leads nowhere (81,137)->(81.0025,137.145).
+Internal Error (overlap) in u: couldn't find a needed exit from an intersection
+Internal Error (overlap) in u: Humph. This monotonic leads nowhere (127.473,235.473)->(127,237).
+Internal Error (overlap) in u: couldn't find a needed exit from an intersection
+```
+
+Coming from the fontie  server process. It took several minutes to finish.
+
+When it ran successfully, this curl command returned: 
+
+```
+{"package":"fontie_707d50ce-8998-4e85-b391-d788fe57c8d8"}
+```
+
+I moved the resulting folder to the desktop:
+
+```
+mv /tmp/fontie_707d50ce-8998-4e85-b391-d788fe57c8d8/fontie-package ~/Desktop/Blackpine
+```
 
 ----
 
